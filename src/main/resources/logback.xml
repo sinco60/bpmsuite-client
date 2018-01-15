@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="10 seconds">
+     
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>
+				%d{yyyy-dd-MM HH:mm:ss z}|%-5level|%-50logger{50} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+
+
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	
+
+	<!-- Logging categories that can be very verbose but not usually useful to us -->
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.springframework.security" level="DEBUG" />
+	<logger name="org.springframework.web" level="DEBUG" />
+	
+	<logger name="org.rbfcu" level="DEBUG" />
+	<logger name="org.apache" level="WARN" />
+
+
+</configuration>
