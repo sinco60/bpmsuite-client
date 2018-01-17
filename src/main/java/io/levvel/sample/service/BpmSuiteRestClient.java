@@ -1,5 +1,8 @@
 package io.levvel.sample.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -36,16 +39,22 @@ public class BpmSuiteRestClient {
 	}
 	
 	public String startWorkFlow() {
-		String url = BASE_URL + "runtime/" + DEPLOYMENT_ID + "/process/" + PROCESS_DEF_ID + "/start";
+		String url = BASE_URL + "runtime/" + DEPLOYMENT_ID + "/process/" + PROCESS_DEF_ID + "/start?map_name={name}";
 		HttpEntity<String> request = new HttpEntity<String>(buildAuthHeader());
-		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
+		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class, "mark");
+		
 		log.debug("result of POST: {}", response.getBody());
 		return response.getBody();
 	}
 	
 	public String signalWorkFlow(String id) {
-		//create signal for workflow
-		return null;
+		String url = BASE_URL + "runtime/" + DEPLOYMENT_ID + "/process/instance/" + id + "/signal?signal={signal}&name={name}";
+	
+		HttpEntity<String> request = new HttpEntity<String>(buildAuthHeader());
+		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class, "tweetIt","mark");
+		
+		log.debug("result of POST: {}", response.getBody());
+		return response.getBody();
 		
 	}
 

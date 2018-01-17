@@ -29,6 +29,7 @@ public class BpmSuiteRestClientTest {
 	
 	@Test
 	public void testSignalWorkFlow() {
-		fail("Not yet implemented");
+		String result = bpmSuiteRestClient.signalWorkFlow("8");
+		assertNotNull(result);
 	}
 }
